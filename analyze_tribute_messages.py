@@ -15,7 +15,7 @@ OUTPUT_FILE = 'data/stevejobs_tribute.txt'
 
 adverbs = defaultdict(int)
 adjectives = defaultdict(int)
-bigrams = defaultdict(int)
+trigrams = defaultdict(int)
 
 message_has_adjective = False
 message_has_adverb = False
@@ -105,7 +105,7 @@ for line in open(OUTPUT_FILE):
 # compute trigrams
 	nltk_trigrams = nltk.trigrams(text)
 	for itm in nltk_trigrams:
-		bigrams[itm] += 1
+		trigrams[itm] += 1
 
 # pos-tag each token. we're interested in adjectives and adverbs
 	parts_of_speech = nltk.pos_tag(text)
@@ -140,9 +140,9 @@ print "total messages with product mentions: %s" % messages_with_product_mention
 print "total messages: %s" % messages
 
 
-# n = 20
-# print "top %s adjectives" % n
-# top_n(bigrams, n)
+n = 50
+print "top %s trigrams" % n
+top_n(trigrams, n)
 srtd=sorted(products.iteritems(),key=itemgetter(1))
 for x,y in srtd:
 	print "%s\t\t%s" % (x,y['count'])

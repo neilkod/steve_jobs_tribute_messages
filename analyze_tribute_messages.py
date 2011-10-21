@@ -127,6 +127,7 @@ for line in open(OUTPUT_FILE):
 	if message_has_adverb:
 		messages_with_adverb += 1
 
+# output the 25 most frequently-used adjectives and adverbs
 n = 25
 print "top %s adverbs" % n
 top_n(adverbs, n)
@@ -140,13 +141,17 @@ print "total messages with product mentions: %s" % messages_with_product_mention
 print "total messages: %s" % messages
 
 
+# output the top 50 most-common trigrams
 n = 50
 print "top %s trigrams" % n
 top_n(trigrams, n)
 srtd=sorted(products.iteritems(),key=itemgetter(1))
 for x,y in srtd:
 	print "%s\t\t%s" % (x,y['count'])
+	
+	
 print
 print
+# concordance for newton
 print "concordance for newton:"
 nltk_concordance('newton',OUTPUT_FILE)

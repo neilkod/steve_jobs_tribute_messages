@@ -43,14 +43,24 @@ products = {'iPhone':{'regex':'iphones?','count':0},
 	'OSX':{'regex':'osx','count':0},
 	'iMovie':{'regex':'imovie','count':0},
 	'Macintosh':{'regex':'macintosh','count':0},
-	'Lisa':{'regex':'macintosh','count':0},
+	'Lisa':{'regex':'lisa','count':0},
 	'Mac':{'regex':'mac','count':0},
 }
+def clean(txt):
+  return txt.replace('\n',' ').replace('\t',' ')
 
 def top_n(dct,n = 10):
 	srtd=sorted(dct.iteritems(), key=itemgetter(1), reverse=True)
 	for x in srtd[0:n+1]:
 		print x
+
+def nltk_hacking(text_file=OUTPUT_FILE):
+	f = open(text_file).read()
+	f = clean(f)
+	f = unescape(f)
+	text = nltk.WordPunctTokenizer().tokenize(f) 
+	txt = nltk.Text(text)
+	return txt
 
 def nltk_concordance(term,text_file):
 	f = open(text_file).read()
@@ -155,3 +165,5 @@ print
 # concordance for newton
 print "concordance for newton:"
 nltk_concordance('newton',OUTPUT_FILE)
+
+
